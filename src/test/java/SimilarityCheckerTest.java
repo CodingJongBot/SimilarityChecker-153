@@ -52,8 +52,13 @@ class SimilarityCheckerTest {
 
 
     @Test
-    void getMaxLengthSimilarity() {
+    void getLengthSimilarityScoreMax() {
         assertEquals(60,similarityChecker.getSimilarity("ASD","DSA"));
+    }
+
+    @Test
+    void getLengthSimilarityScoreZero() {
+        assertEquals(0,similarityChecker.getSimilarity("ASD","DSADDSA"));
     }
 
     //TODO    2. 등장 알파벳 검사 (최대 40점)
