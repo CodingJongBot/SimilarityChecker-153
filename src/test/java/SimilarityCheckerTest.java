@@ -44,11 +44,12 @@ class SimilarityCheckerTest {
         assertIllegalArgumentException("DSA",null);
     }
 
-    private void assertIllegalArgumentException(String inputString1, String inputString2) {
+    private void assertIllegalArgumentException(String input1, String input2) {
         assertThrowsExactly(IllegalArgumentException.class,()->{
-            similarityChecker.getSimilarity(inputString1, inputString2);
+            similarityChecker.getSimilarity(input1, input2);
         });
     }
+
 
 
 
