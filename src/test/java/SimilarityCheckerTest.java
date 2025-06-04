@@ -6,61 +6,51 @@ import static org.junit.jupiter.api.Assertions.*;
 class SimilarityCheckerTest {
 
     SimilarityChecker similarityChecker;
+
     @BeforeEach
     void setUp() {
-         similarityChecker = new SimilarityChecker();
+        similarityChecker = new SimilarityChecker();
     }
+
     @Test
     void createSimilarityChecker() {
         assertNotNull(similarityChecker);
     }
 
     //TODO    1. 글자 수 검사 (최대 60점)
-    /* 글자 수 검사 (max 60점)
-    같은 글자수일때, 최대 점수 60점 획득
-    문자열 길이가 2배 이상 차이가 난다면, 0점
-
-    부분 점수 측정 방법
-    • 𝐴 = 긴 문자열 길이
-    • 𝐵 = 짧은 문자열의 길이
-
-    AAABB, BAA = 부분점수
-    AA, AAE = 부분점수
-
-     */
-
-
     @Test
     void checkValidInputs() {
         assertInputException();
     }
 
-    private void assertInputException(){
-        assertIllegalArgumentException(null,"ASD");
-        assertIllegalArgumentException("DSA",null);
+    private void assertInputException() {
+        assertIllegalArgumentException(null, "ASD");
+        assertIllegalArgumentException("DSA", null);
+        assertIllegalArgumentException("","ASD");
+        assertIllegalArgumentException("DSA","");
     }
 
     private void assertIllegalArgumentException(String input1, String input2) {
-        assertThrowsExactly(IllegalArgumentException.class,()->{
-            similarityChecker.getSimilarity(input1, input2);
+        assertThrowsExactly(IllegalArgumentException.class, () -> {
+            similarityChecker.assertIllegalArgumentException(input1, input2);
         });
     }
 
 
     @Test
     void getLengthSimilarityScoreMax() {
-        assertEquals(60,similarityChecker.getSimilarity("ASD","DSA"));
+        assertEquals(60, similarityChecker.getLengthSimilarScore("ASD", "DSA"));
     }
 
     @Test
     void getLengthSimilarityScoreZero() {
-        assertEquals(0,similarityChecker.getSimilarity("A","BB"));
+        assertEquals(0, similarityChecker.getLengthSimilarScore("A", "BB"));
     }
 
     @Test
     void getPartialLengthSimilarityScore() {
-        assertEquals(20,similarityChecker.getSimilarity("AAABB","BAA"));
-        assertEquals(30,similarityChecker.getSimilarity("AA","AAE"));
+        assertEquals(20, similarityChecker.getLengthSimilarScore("AAABB", "BAA"));
+        assertEquals(30, similarityChecker.getLengthSimilarScore("AA", "AAE"));
     }
 
     //TODO    2. 등장 알파벳 검사 (최대 40점)
